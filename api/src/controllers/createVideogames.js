@@ -4,7 +4,14 @@ const createVideogames = async (req, res) => {
       try {
         const { slug, name, released, platforms, genres, background_image, rating } = req.body;
     
-        const videogame = await Videogames.create({ slug, name, released, platforms, background_image, rating });
+        let videogame = await Videogames.create({ 
+          slug, 
+          name, 
+          released, 
+          platforms, 
+          genres, 
+          background_image: background_image ? background_image: "https://www.mikeburger.com/td-simpsons-dog.jpg", 
+          rating });
     
         if (genres && genres.length>0) {
           const genresDB = await Genres.findAll({ where: { name: genres } });

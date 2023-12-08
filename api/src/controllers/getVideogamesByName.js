@@ -15,7 +15,7 @@ const getVideogamesByName = async (req, res) => {
       const videogames = response.data.results;
   
       const videogameArray = await Promise.all(
-        videogames.map(async (videogame) => {
+        videogames.slice(0, 15).map(async (videogame) => {
   
           const { slug, name, released, platforms, background_image, rating } = videogame;
           const platform = platforms.map(platform => platform.platform.name);
