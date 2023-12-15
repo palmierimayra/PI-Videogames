@@ -1,0 +1,60 @@
+.h2 {
+    font-family: Calibri;
+    font-size: 20px;
+    text-align: center;
+    -webkit-text-stroke: 0.5px black;
+    color: black;
+    margin: 2mm;
+  }
+
+.div{
+    margin-top: 10mm;
+    border-radius: 10px;
+    display: flex;
+    width: 305px;
+    height: auto;
+    flex-direction:column;
+    align-items: center;
+    border: solid rgb(188, 53, 0) 0.5mm;
+    background-color: rgba(255, 139, 72, 0.5);
+    padding: 1mm 1mm 1mm 1mm;
+}
+
+.img{
+    margin-top: 0.5mm;
+    border-radius: 10px;
+    border: solid black 0.5mm;
+    height: 180px;
+    width: 290px;
+}
+
+.nameid {
+    color: rgb(255, 255, 255);
+    font-family: Calibri;
+    font-size: 16px;
+    margin-top: -9mm;
+    border-radius: 6px;
+    border: solid rgb(104, 0, 0) 0.3mm;
+    padding: 1mm;
+}
+
+/* Estilo para enlaces no visitados */
+a {
+    color: transparent;
+    text-decoration: none; /* Para quitar el subrayado predeterminado */
+  }
+  
+  /* Estilo para enlaces visitados */
+  a:visited {
+    color: transparent;
+  }
+  
+  /* Estilo para enlaces al pasar el ratón */
+  a:hover {
+    color: palevioletred;
+  }
+  
+  /* Estilo para enlaces activos (cuando se hace clic en ellos) */
+  a:active {
+    color: transparent;
+  }

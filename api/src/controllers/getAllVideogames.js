@@ -3,15 +3,17 @@ const axios = require("axios");
 
 const getAllVideogames = async (req, res) => {
   try {
-    const URL = `https://api.rawg.io/api/games?key=${process.env.API_KEY}`;
+    const URL = `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=1`;
+    
     const response = await axios(URL);
     const videogames = response.data.results;
 
     const videogameArray = await Promise.all(
       videogames.map(async (videogame) => {
 
-        const { slug, name, released, platforms, background_image, rating } = videogame;
+        const { slug, name, released, platforms, background_image, rating, genres } = videogame;
         const platform = platforms.map(platform => platform.platform.name);
+        const genre = genres.map(genre => genre.name);
 
         return {
           name,
@@ -20,6 +22,7 @@ const getAllVideogames = async (req, res) => {
           background_image,
           released,
           rating,
+          genres: genre.join(", ")
         };
       })
     );
