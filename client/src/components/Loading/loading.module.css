@@ -1,0 +1,21 @@
+.divLoading {
+  width: 350px;
+  height: 350px;
+  border-radius: 30px;
+  margin-top: 140px;
+  display:grid;
+  align-content: center;
+  justify-content: center;
+}
+
+.imgLoading {
+  width: 300px;
+  margin-top: -50px;
+}
+
+.h2Loading {
+  color: white;
+  font-family: calibri;
+  font-size: 18px;
+}
+

@@ -7,37 +7,47 @@ export default function Pagination ({pagina, setPagina, maximo}) {
     const [input, setInput] = useState(1);
     
     const previousPage = () => {
-        setInput(input - 1);
-        setPagina(pagina - 1);
+        if (pagina > 1) {
+            setInput(input - 1);
+            setPagina(pagina - 1);
+        }
     }
 
     const nextPage = () => {
-        setInput(input + 1);
-        setPagina(pagina + 1);
+        if (pagina < Math.ceil(maximo)) {
+            setInput(input + 1);
+            setPagina(pagina + 1);
+        }
     }
 
     const onKeyDown = (e) => {
-        if(e.keyCode === 13) {
-            setPagina(parseInt(e.target.value))
-            if(parseInt(e.target.value)<1 || parseInt(e.target.value)>Math.ceil(maximo) || isNaN(parseInt(e.target.value))) {
+        if (e.keyCode === 13) {
+            const inputValue = parseInt(e.target.value);
+
+            if (inputValue < 1) {
                 setPagina(1);
                 setInput(1);
-            } else {
-                setPagina(parseInt(e.target.value))
+            } else if (inputValue > Math.ceil(maximo)) {
+                setPagina(Math.ceil(maximo));
+                setInput(Math.ceil(maximo));
+            } else if (!isNaN(inputValue)) {
+                setPagina(inputValue);
+                setInput(inputValue);
             }
         }
     };
 
     const onChange = (e) => {
-        setInput(e.target.value);
+        const inputValue = e.target.value;
+        setInput(inputValue);
     };
 
-return (
-    <div className={divPr}>
-        <button className={btn} onClick={previousPage}>Anterior</button>
-        <input className={inputP} onChange={onChange} onKeyDown={(e) => {onKeyDown(e)}} value={input}/>
-        <span className={pages}>de {Math.ceil(maximo)}</span>
-        <button className={btn} onClick={nextPage}>Siguiente</button>
-    </div>
-)
+    return (
+        <div className={divPr}>
+            <button className={btn} onClick={previousPage}>Anterior</button>
+            <input className={inputP} onChange={onChange} onKeyDown={(e) => onKeyDown(e)} value={input}/>
+            <span className={pages}>de {Math.ceil(maximo)}</span>
+            <button className={btn} onClick={nextPage}>Siguiente</button>
+        </div>
+    );
 };

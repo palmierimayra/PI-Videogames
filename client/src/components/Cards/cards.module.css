@@ -1,5 +1,22 @@
 .divFondo {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 8px;
+    grid-gap: 5px;
+    grid-auto-flow: dense;
+}
+
+.order {
+    background-color: rgba(104, 0, 0);
+    color: white;
+    border-radius: 5mm;
+    width: auto;
+    height: auto;
+    text-align: center;
+    margin: 0 2mm 0 2mm;
+    padding: 0.3mm;
+}
+
+option {
+    font-family: calibri;
+    font-size: 16px;
 }

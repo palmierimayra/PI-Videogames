@@ -18,7 +18,7 @@ const getVideogamesById = async (req, res) => {
         id,
         name,
         slug,
-        platforms: platform,
+        platforms: platform.join(", "),
         background_image,
         released,
         rating,

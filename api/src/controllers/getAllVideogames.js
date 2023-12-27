@@ -2,32 +2,36 @@ require('dotenv').config();
 const axios = require("axios");
 
 const getAllVideogames = async (req, res) => {
+  let allGames = [];
+  let URL = `https://api.rawg.io/api/games?key=${process.env.API_KEY}`;
+
   try {
-    const URL = `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=1`;
-    
-    const response = await axios(URL);
-    const videogames = response.data.results;
+    while (allGames.length < 100 && URL) {
+      let response = await axios.get(URL);
+      let { results, next } = response.data;
 
-    const videogameArray = await Promise.all(
-      videogames.map(async (videogame) => {
+      allGames = [...allGames, ...results];
+      URL = next;
+    }
 
-        const { slug, name, released, platforms, background_image, rating, genres } = videogame;
-        const platform = platforms.map(platform => platform.platform.name);
-        const genre = genres.map(genre => genre.name);
+    allGames.forEach(async (videogame, index) => {
+      const { id, slug, name, released, platforms, background_image, rating, genres } = videogame;
+      const platform = platforms.map(platform => platform.platform.name);
+      const genre = genres.map(genre => genre.name);
 
-        return {
-          name,
-          slug,
-          platforms: platform,
-          background_image,
-          released,
-          rating,
-          genres: genre.join(", ")
-        };
-      })
-    );
+      allGames[index] = {
+        id, 
+        name,
+        slug,
+        platforms: platform,
+        background_image,
+        released,
+        rating,
+        genres: genre.join(", ")
+      };
+    });
 
-    return res.status(200).json(videogameArray);
+    return res.status(200).json(allGames);
 
   } catch (error) {
     console.error(error);
@@ -36,5 +40,5 @@ const getAllVideogames = async (req, res) => {
 };
 
 module.exports = {
-    getAllVideogames,
+  getAllVideogames,
 };

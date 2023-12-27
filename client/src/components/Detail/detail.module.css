@@ -1,0 +1,39 @@
+.divPrinc {
+    display: flex;
+    flex-direction: row;
+    font-family: calibri;
+    font-weight: bolder;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  
+  .title {
+    font-size: 56px;
+    color: rgba(104, 0, 0);
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: white;
+  }
+  .datos {
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: calibri;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 8mm;
+    color: white;
+    text-align: center;
+    padding: 0px 8px 0px 8px;
+    margin-top: -5mm;
+    width: auto;
+    height: 430px;
+}
+  
+  .img {
+    margin-top: -20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 610px;
+    height: 430px;
+    border: solid rgba(104, 0, 0) 1mm;
+    border-radius: 60px;
+  }
+  
