@@ -1,11 +1,10 @@
 import styles from "./pagination.module.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function Pagination ({pagina, setPagina, maximo}) {
+export default function Pagination ({pagina, setPagina, input, setInput, maximo}) {
 
     const {btn, divPr, pages, inputP} = styles;
-    const [input, setInput] = useState(1);
-    
+
     const previousPage = () => {
         if (pagina > 1) {
             setInput(input - 1);

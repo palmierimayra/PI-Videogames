@@ -2,14 +2,12 @@ import SearchBar from "../SearchBar/SearchBar";
 import styled from "./nav.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 
-export default function Nav(props) {
+export default function Nav({setPagina, setInput}) {
   const location = useLocation();
 
   if (location.pathname === "/") {
     return null;
   }
-
-  const { onSearch } = props;
 
   const { div, btn } = styled;
 
@@ -25,7 +23,7 @@ export default function Nav(props) {
         <NavLink to="/form">
           <button className={btn}>Formulario</button>
         </NavLink>
-        <SearchBar onSearch={onSearch} />
+        <SearchBar setPagina={setPagina} setInput={setInput}/>
       </nav>
     </div>
   );

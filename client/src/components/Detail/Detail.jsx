@@ -15,6 +15,7 @@ export default function Detail() {
             id: data.id,
             name: data.name,
             slug: data.slug,
+            genre: data.genres,
             platforms: data.platforms,
             background_image: data.background_image,
             released: data.released,
@@ -37,6 +38,7 @@ export default function Detail() {
           <div className={datos}>
             <h1 className={title}>{videogame.id} - {videogame.name.toUpperCase()}</h1>
             <h2>SLUG | {videogame.slug}</h2>
+            <h2>GENRES | {videogame.genres}</h2>
             <h2>PLATFORMS | {videogame.platforms}</h2>
             <h2>RELEASED | {videogame.released}</h2>
             <h2>RATING | {videogame.rating}</h2>

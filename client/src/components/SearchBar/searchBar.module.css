@@ -1,0 +1,27 @@
+.divsch {
+    display:inline-block;
+    align-items:end;
+    height: 10mm;
+    padding: 1mm;
+    margin-left: 800px;
+  }
+  
+  .btn {
+    background-color: rgba(104, 0, 0);
+    color: white;
+    border-radius: 2mm;
+    width: auto;
+    height: auto;
+    padding: 4px 8px 4px 8px;
+    text-align: center;
+    font-size: 14px;
+    font-family: calibri;
+    margin-right: 4mm;
+  }
+  
+  .input {
+    border-radius: 10px;
+    height: 8mm;
+    width: 100mm;
+  }
+  

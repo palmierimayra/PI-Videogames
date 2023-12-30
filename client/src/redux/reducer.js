@@ -41,7 +41,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
     }
 
     case ORDER_BY_NAME:
-      const orderByName = [...state.videogamesOriginal].sort((a, b) => {
+      const orderByName = [...state.allVideogames].sort((a, b) => {
         return payload === "A" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
       });
       return {
@@ -50,7 +50,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case ORDER_BY_RATING:
-      const orderByRating = [...state.videogamesOriginal].sort((a, b) => {
+      const orderByRating = [...state.allVideogames].sort((a, b) => {
         return payload === "A" ? a.rating - b.rating : b.rating - a.rating;
       });
       return {

@@ -1,6 +1,7 @@
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import Loading from "../Loading/Loading";
+import Nav from "../Nav/Nav";
 import styles from "./cards.module.css";
 import { loadVideogames, loadGenres, orderByName, orderByRating, filterByGenre } from "../../redux/actions/actions";
 import { useEffect, useState } from "react";
@@ -11,6 +12,7 @@ const Cards = () => {
   const dispatch = useDispatch();
   const videogames = useSelector((state) => state.allVideogames);
   const genres = useSelector((state) => state.allGenres);
+  const [input, setInput] = useState(1);
   const [pagina, setPagina] = useState(1);
   const [porPagina, setPorPagina] = useState(15);
   const [loading, setLoading] = useState(true);
@@ -49,6 +51,7 @@ const Cards = () => {
 
   return (
     <div>
+      <Nav setPagina={setPagina} setInput={setInput} />
             {!loading && (
       <div>
         <select className={order} onChange={handleOrderR}>
@@ -91,7 +94,7 @@ const Cards = () => {
         </div>
       )}
       {!loading && (
-        <Pagination pagina={pagina} setPagina={setPagina} maximo={maximo} />
+        <Pagination pagina={pagina} setPagina={setPagina} input={input} setInput={setInput} maximo={maximo} />
       )}
     </div>
   );

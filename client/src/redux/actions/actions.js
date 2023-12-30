@@ -54,7 +54,7 @@ export const createVideogame = (videogame) => {
 
 export const searchVideogame = (name) => {
   return async (dispatch) => {
-    const response = await axios.get(`http://localhost:3001/videogames/name?name=${name.toLowerCase()}`);
+    const response = await axios.get(`http://localhost:3001/videogames/name?name="${name}"`);
     return dispatch({
       type: SEARCH_VIDEOGAME,
       payload: response.data,
