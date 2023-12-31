@@ -42,14 +42,25 @@ export const filterByGenre = (genre) => {
   };
 };
 
+export const filterByOrigin = (source) => {
+  return {
+    type: FILTER_BY_ORIGIN,
+    payload: source,
+  };
+};
+
 export const createVideogame = (videogame) => {
   return async (dispatch) => {
-    const response = await axios.post('http://localhost:3001/videogames', videogame);
-    return dispatch({
-      type: CREATE_VIDEOGAME,
-      payload: response,
-    });
-};
+    try {
+      const response = await axios.post('http://localhost:3001/videogames', videogame);
+      return dispatch({
+        type: CREATE_VIDEOGAME,
+        payload: response,
+      });
+    } catch (error) {
+      console.error("Error creating videogame:", error);
+    }
+  };
 }
 
 export const searchVideogame = (name) => {

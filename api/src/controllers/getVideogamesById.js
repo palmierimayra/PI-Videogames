@@ -11,13 +11,16 @@ const getVideogamesById = async (req, res) => {
       res.status(200).json(videogameInDB);
     } else {
       const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${process.env.API_KEY}`);
-      const { slug, name, released, platforms, background_image, rating } = response.data;
+      const { slug, name, released, genres, platforms, background_image, rating } = response.data;
       const platform = platforms.map(platform => platform.platform.name);
+      const genre = genres.map(genre => genre.name);
+    
 
       const videogame = {
         id,
         name,
         slug,
+        genre: genre.join(", "),
         platforms: platform.join(", "),
         background_image,
         released,

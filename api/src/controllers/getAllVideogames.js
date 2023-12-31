@@ -1,25 +1,27 @@
 require('dotenv').config();
 const axios = require("axios");
+const {Videogames, Genres} = require('../db');
 
 const getAllVideogames = async (req, res) => {
-  let allGames = [];
+  let allGamesAPI = [];
+  let allGamesDB = [];
   let URL = `https://api.rawg.io/api/games?key=${process.env.API_KEY}`;
 
   try {
-    while (allGames.length < 100 && URL) {
+    while (allGamesAPI.length < 100 && URL) {
       let response = await axios.get(URL);
       let { results, next } = response.data;
 
-      allGames = [...allGames, ...results];
+      allGamesAPI = [...allGamesAPI, ...results];
       URL = next;
     }
 
-    allGames.forEach(async (videogame, index) => {
+    allGamesAPI.forEach(async (videogame, index) => {
       const { id, slug, name, released, platforms, background_image, rating, genres } = videogame;
       const platform = platforms.map(platform => platform.platform.name);
       const genre = genres.map(genre => genre.name);
 
-      allGames[index] = {
+      allGamesAPI[index] = {
         id, 
         name,
         slug,
@@ -27,11 +29,32 @@ const getAllVideogames = async (req, res) => {
         background_image,
         released,
         rating,
-        genres: genre.join(", ")
+        genres: genre.join(", "),
+        source: 'API',
       };
     });
 
-    return res.status(200).json(allGames);
+      const dbVideogames = await Videogames.findAll();    
+
+      let allGamesDB = dbVideogames.map((videogame) => {
+          return{
+              id: videogame.id,
+              name: videogame.name,
+              slug: videogame.slug? videogame.slug : 'sin descripcion',
+              platforms: videogame.platforms.join,
+              background_image: videogame.background_image,
+              genres: videogame.genres,
+              released: videogame.released,
+              rating: videogame.rating,
+              source: 'DataBase',
+          };    
+      });    
+
+    let allGamesResults = [...allGamesAPI, ...allGamesDB];
+
+    console.log(allGamesDB);
+
+    return res.status(200).json(allGamesResults);
 
   } catch (error) {
     console.error(error);

@@ -3,7 +3,7 @@ import Pagination from "../Pagination/Pagination";
 import Loading from "../Loading/Loading";
 import Nav from "../Nav/Nav";
 import styles from "./cards.module.css";
-import { loadVideogames, loadGenres, orderByName, orderByRating, filterByGenre } from "../../redux/actions/actions";
+import { loadVideogames, loadGenres, orderByName, orderByRating, filterByGenre, filterByOrigin } from "../../redux/actions/actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -39,7 +39,7 @@ const Cards = () => {
     dispatch(orderByName(order));
   };
 
-  const handleFilter = (event) => {
+  const handleFilterG = (event) => {
     const genre = event.target.value;
 
     if(genre==="All Genres") {
@@ -48,6 +48,17 @@ const Cards = () => {
     dispatch(filterByGenre(genre));
   }
 };
+
+const handleFilterO = (event) => {
+  const origin = event.target.value;
+
+  if(origin==="All Origins") {
+    dispatch(filterByOrigin(null));
+  } else {
+  dispatch(filterByOrigin(origin));
+}
+};
+
 
   return (
     <div>
@@ -64,22 +75,22 @@ const Cards = () => {
           <option value="A">Ascendent</option>
           <option value="D">Descendent</option>
         </select>
-        <select className={order} onChange={handleFilter}>
-        <option defaultValue>All Genres</option>
+        <select className={order} onChange={handleFilterG}>
+        <option value="" selected disabled>All Genres</option>
         {genres.map((genre) => (
           <option value={genre.name}>{genre.name}</option>
         ))}
       </select>
-      <select className={order} onChange={handleFilter}>
+      <select className={order} onChange={handleFilterO}>
         <option value="">All origins</option>
-        <option value="DB">Database</option>
-        <option value="API">Api</option>
+        <option value="DataBase">DataBase</option>
+        <option value="API">API</option>
       </select>
       </div>)}
       {loading ? (<Loading />) : (
         <div className={divFondo}>
           {videogames &&
-            videogames.slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina).map(({ id, name, background_image, genres, rating }, index) => {
+            videogames.slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina).map(({ id, name, background_image, genres, rating, source }, index) => {
                 return (
                   <Card
                     key={id}
@@ -88,6 +99,7 @@ const Cards = () => {
                     image={background_image}
                     genres={genres}
                     rating={rating}
+                    source={source}
                   />
                 );
               })}

@@ -1,5 +1,4 @@
 import styles from "./pagination.module.css";
-import { useState, useEffect } from 'react';
 
 export default function Pagination ({pagina, setPagina, input, setInput, maximo}) {
 

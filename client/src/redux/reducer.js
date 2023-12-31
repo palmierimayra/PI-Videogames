@@ -4,7 +4,6 @@ const initialState = {
   allVideogames: [],
   allGenres: [],
   videogamesOriginal: [],
-  filteredVideogames: [],
   createVideogame: null,
 };
 
@@ -60,7 +59,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 
       case FILTER_BY_GENRE: {      
 
-         let filteredVideogames = [];
+        let filteredVideogames= [];
 
          if(payload===null) {
           filteredVideogames = [...state.videogamesOriginal];
@@ -74,6 +73,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
         };
       }
       
+      case FILTER_BY_ORIGIN: {      
+
+        let filteredByOrigin = [];
+
+        if(payload===null) {
+          filteredByOrigin = [...state.videogamesOriginal];
+        } else {
+          filteredByOrigin = [...state.videogamesOriginal].filter((videogame) => videogame.source.includes(payload));
+        }
+
+       return {
+         ...state,
+         allVideogames: filteredByOrigin,
+       };
+     }
+    
 default:
   return {
     ...state,
