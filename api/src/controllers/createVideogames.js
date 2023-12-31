@@ -1,6 +1,7 @@
 const {Videogames, Genres} = require('../db');
 
 const createVideogames = async (req, res) => {
+      try {
         const { id, slug, name, released, platforms, genres, background_image, rating } = req.body;
 
         const videogame = await Videogames.create({ 
@@ -9,16 +10,28 @@ const createVideogames = async (req, res) => {
           name, 
           released, 
           platforms, 
+          genres,
           background_image: background_image ? background_image: "https://www.mikeburger.com/td-simpsons-dog.jpg", 
           rating
         });
     
-        genres.forEach(async (G) => {
-          let genresGame = await Genres.findOne({ where: { name: G } })
-          await videogame.addGenre(genresGame)
-      })
-        res.send('Videogame created successfully!')
-    }
+        let dbGenres = await Genres.findAll({
+          where: {
+              name: genres
+          }
+      });
+      if (dbGenres && dbGenres.length > 0) {
+          await videogame.addGenres(dbGenres);
+      } else {
+          throw Error('Por favor, intenta con otro género');
+      }
+    
+        res.status(200).json(videogame);
+
+      } catch (error) {
+          res.status(500).json({ message: error.message });
+        }
+};
 
 module.exports = {
     createVideogames,

@@ -64,7 +64,7 @@ export default function Form() {
       platforms: formData.platforms,
       };
 
-    dispatch(createVideogame(videogame));
+    dispatch(createVideogame(videogame));    
     navigate("/home");
   };
 
@@ -102,12 +102,12 @@ export default function Form() {
   ))}
 </div>
         <p></p>
-        <label className={label}>Género/s:</label>
+        <label htmlFor="genres" className={label}>Género/s:</label>
         <div className={checkbox}>
   {genres && genres.map((genre) => (
     <div className={genreList} key={genre.name}>
-      <input type="checkbox" value={genre.name} name="genres" checked={formData.genres.includes(genre.name)} onChange={handleInputChange} />
-      <label className={genreList} htmlFor={genre.name}>{genre.name}</label>
+      <input type="checkbox" id={genre.name} value={genre.name} name="genres" checked={formData.genres.includes(genre.name)} onChange={handleInputChange} />
+      <label className={genreList}  key={genre.id} htmlFor={genre.name} >{genre.name}</label>
     </div>
   ))}
 </div>

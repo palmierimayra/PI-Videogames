@@ -66,17 +66,17 @@ const handleFilterO = (event) => {
             {!loading && (
       <div>
         <select className={order} onChange={handleOrderR}>
-          <option value="" selected disabled>Order By Rating</option>
+          <option value="" defaultValue>Order By Rating</option>
           <option value="A">Ascendent</option>
           <option value="D">Descendent</option>
         </select>
         <select className={order} onChange={handleOrderN}>
-          <option value="" selected disabled>Order By Name</option>
+          <option value="" defaultValue>Order By Name</option>
           <option value="A">Ascendent</option>
           <option value="D">Descendent</option>
         </select>
         <select className={order} onChange={handleFilterG}>
-        <option value="" selected disabled>All Genres</option>
+        <option value="">All Genres</option>
         {genres.map((genre) => (
           <option value={genre.name}>{genre.name}</option>
         ))}

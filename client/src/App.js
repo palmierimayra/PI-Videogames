@@ -4,14 +4,8 @@ import Cards from './components/Cards/Cards';
 import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from "react";
 
 function App() {
-  const [videogames, setVideogames] = useState([]);
-
-  useEffect(() => {
-    console.log("Updated videogames state:", videogames);
-  }, [videogames]);
 
   return (
       <div className="App">

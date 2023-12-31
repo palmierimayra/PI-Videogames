@@ -2,6 +2,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "../Detail/detail.module.css";
+import { Link } from "react-router-dom";
 
 export default function Detail() {
   const { id } = useParams();
@@ -11,12 +12,13 @@ export default function Detail() {
     axios(`http://localhost:3001/videogames/${id}`).then(
       ({ data }) => {
         console.log("API response:", data);
+        
         const gameData = {
           id: data.id,
           name: data.name,
           slug: data.slug,
-          genres: data.genres ? data.genres.map(genre => genre.name).join(", ") : '',
-          platforms: data.platforms.join(", "),
+          genres: data.genres,
+          platforms: data.platforms,
           background_image: data.background_image,
           released: data.released,
           rating: data.rating,
@@ -26,7 +28,7 @@ export default function Detail() {
     );
   }, [id]);
 
-  const { divPrinc, title, datos, img } = styles;
+  const { divPrinc, title, datos, img, btn } = styles;
 
   return (
     <div className={divPrinc}>
@@ -42,6 +44,10 @@ export default function Detail() {
             <h2>PLATFORMS | {videogame.platforms}</h2>
             <h2>RELEASED | {videogame.released}</h2>
             <h2>RATING | {videogame.rating}</h2>
+            <p></p>
+            <Link to="/home">
+          <button className={btn} type="submit">Volver</button>
+      </Link>
           </div>
         </>
       ) : (
