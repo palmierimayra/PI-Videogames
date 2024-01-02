@@ -46,6 +46,8 @@ const Cards = () => {
       dispatch(filterByGenre(null));
     } else {
     dispatch(filterByGenre(genre));
+    setPagina(1);
+    setInput(1);
   }
 };
 
@@ -76,9 +78,9 @@ const handleFilterO = (event) => {
           <option value="D">Descendent</option>
         </select>
         <select className={order} onChange={handleFilterG}>
-        <option value="">All Genres</option>
+        <option key={genres.id} value="">All Genres</option>
         {genres.sort().map((genre) => (
-          <option key={genre.id} value={genre.name}>{genre.name}</option>
+          <option key={genre.name} value={genre.name}>{genre.name}</option>
         ))}
       </select>
       <select className={order} onChange={handleFilterO}>

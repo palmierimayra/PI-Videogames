@@ -6,6 +6,7 @@ const initialState = {
   videogamesOriginal: [],
   createVideogame: null,
   videogameById: [],
+  searchByName: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {

@@ -36,7 +36,7 @@ const getAllVideogames = async (req, res) => {
 
       const dbVideogames = await Videogames.findAll();    
 
-      let allGamesDB = dbVideogames.map((videogame) => {
+      allGamesDB = dbVideogames.map((videogame) => {
           return{
               id: videogame.id,
               name: videogame.name,

@@ -18,6 +18,7 @@ export default function SearchBar({setPagina, setInput}) {
     setPagina(1);
   };
 
+
   const onKeyDown = (event) => {
     if(event.keyCode === 13) { 
     onSearch()
