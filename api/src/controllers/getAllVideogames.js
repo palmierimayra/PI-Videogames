@@ -34,16 +34,16 @@ const getAllVideogames = async (req, res) => {
       };
     });
 
-      const dbVideogames = await Videogames.findAll();    
+      const dbVideogames = await Videogames.findAll({ include: [Genres] });   
 
-      allGamesDB = dbVideogames.map((videogame) => {
+      let allGamesDB = dbVideogames.map((videogame) => {
           return{
               id: videogame.id,
               name: videogame.name,
               slug: videogame.slug? videogame.slug : 'sin descripcion',
               platforms: videogame.platforms.join,
               background_image: videogame.background_image,
-              genres: videogame.genres,
+              genres: videogame.genres.map(genre => genre.name).join(", "),
               released: videogame.released,
               rating: videogame.rating,
               source: 'DataBase',
