@@ -15,13 +15,13 @@ const createVideogames = async (req, res) => {
           rating
         });
     
-        let dbGenres = await Genres.findAll({
+        let genresDB = await Genres.findAll({
           where: {
               name: genres
           }
       });
-      if (dbGenres && dbGenres.length > 0) {
-          await videogame.addGenres(dbGenres);
+      if (genresDB && genresDB.length > 0) {
+          await videogame.addGenres(genresDB);
       } else {
           throw Error('Por favor, intenta con otro género');
       }

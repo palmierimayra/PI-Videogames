@@ -5,12 +5,13 @@ const {Videogames, Genres} = require("../db");
 const getVideogamesById = async (req, res) => {
   try {
     const id = req.params.idVideogame;
-    const videogameInDB = await Videogames.findOne({ where: {id},
-      include: {model: Genres, attributes: ['name'],
-      through: {attributes: []}}})
 
-    if (videogameInDB) {
+    if (id.includes("-")) {
+      const videogameInDB = await Videogames.findOne({ where: {id},
+        include: {model: Genres, attributes: ['name'],
+        through: {attributes: []}}})
       const {slug, name, released, genres, platforms, background_image, rating} = videogameInDB;
+
       const videogame = {
         id,
         name,
@@ -23,6 +24,7 @@ const getVideogamesById = async (req, res) => {
       };
 
       res.status(200).json(videogame);
+
     } else {
       const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${process.env.API_KEY}`);
       const { slug, name, released, genres, platforms, background_image, rating } = response.data;

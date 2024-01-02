@@ -1,0 +1,23 @@
+.divLoading {
+    width: 350px;
+    height: 350px;
+    border-radius: 30px;
+    margin: 140px auto;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+  }
+  
+  .imgLoading {
+    width: 300px;
+    margin-top: -50px;
+  }
+  
+  .h2Loading {
+    color: white;
+    font-family: calibri;
+    font-size: 20px;
+  }
+  
+  

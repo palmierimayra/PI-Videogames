@@ -77,8 +77,8 @@ const handleFilterO = (event) => {
         </select>
         <select className={order} onChange={handleFilterG}>
         <option value="">All Genres</option>
-        {genres.map((genre) => (
-          <option value={genre.name}>{genre.name}</option>
+        {genres.sort().map((genre) => (
+          <option key={genre.id} value={genre.name}>{genre.name}</option>
         ))}
       </select>
       <select className={order} onChange={handleFilterO}>

@@ -1,21 +1,29 @@
 const { Videogame, conn } = require('../../src/db.js');
 const { expect } = require('chai');
 
-describe('Videogame model', () => {
+describe('Modelo Videogame', () => {
   before(() => conn.authenticate()
     .catch((err) => {
-      console.error('Unable to connect to the database:', err);
+      console.error('No se pudo conectar a la base de datos:', err);
     }));
-  describe('Validators', () => {
+
+  describe('Validadores', () => {
     beforeEach(() => Videogame.sync({ force: true }));
+
     describe('name', () => {
-      it('should throw an error if name is null', (done) => {
-        Videogame.create({})
-          .then(() => done(new Error('It requires a valid name')))
-          .catch(() => done());
+      it('debería lanzar un error si name es nulo', async () => {
+        try {
+          await Videogame.create({});
+          throw new Error('Requiere un nombre válido');
+        } catch (err) {
+          expect(err.name).to.equal('SequelizeValidationError');
+        }
       });
-      it('should work when its a valid name', () => {
-        Recipe.create({ name: 'Super Mario Bros' });
+
+      it('debería funcionar cuando es un nombre válido', async () => {
+        await Videogame.create({ name: 'Super Mario Bros' });
+        const videogame = await Videogame.findOne({ where: { name: 'Super Mario Bros' } });
+        expect(videogame.name).to.equal('Super Mario Bros');
       });
     });
   });

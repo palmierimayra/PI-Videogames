@@ -52,8 +52,6 @@ const getAllVideogames = async (req, res) => {
 
     let allGamesResults = [...allGamesAPI, ...allGamesDB];
 
-    console.log(allGamesDB);
-
     return res.status(200).json(allGamesResults);
 
   } catch (error) {

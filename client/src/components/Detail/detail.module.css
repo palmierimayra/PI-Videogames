@@ -24,7 +24,7 @@
     padding: 0px 8px 0px 8px;
     margin-top: -5mm;
     width: auto;
-    height: 430px;
+    height: auto;
 }
   
   .img {
@@ -45,8 +45,19 @@
     height: auto;
     padding: 4px 8px 4px 8px;
     text-align: center;
-    font-size: 14px;
+    font-size: 18px;
     font-family: calibri;
     margin-right: 4mm;
     
+  }
+
+  .divBtn {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Ajusta el color de fondo según sea necesario */
+    padding: 10px; /* Añade espaciado si es necesario */
   }

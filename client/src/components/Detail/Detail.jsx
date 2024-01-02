@@ -1,57 +1,50 @@
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "../Detail/detail.module.css";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { videogameById } from "../../redux/actions/actions";
+import LoadingDetail from "../LoadingDetail/LoadingDetail";
 
 export default function Detail() {
   const { id } = useParams();
-  const [videogame, setVideogame] = useState({});
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const videogame = useSelector((state) => state.videogameById);
 
   useEffect(() => {
-    axios(`http://localhost:3001/videogames/${id}`).then(
-      ({ data }) => {
-        console.log("API response:", data);
-        
-        const gameData = {
-          id: data.id,
-          name: data.name,
-          slug: data.slug,
-          genres: data.genres,
-          platforms: data.platforms,
-          background_image: data.background_image,
-          released: data.released,
-          rating: data.rating,
-        };
-        setVideogame(gameData);
-      }
-    );
-  }, [id]);
+    const getVideogameDetail = () => {
+        dispatch(videogameById(id));
+        setLoading(false);
+    };
+    getVideogameDetail();
+  }, [dispatch, id]);
 
-  const { divPrinc, title, datos, img, btn } = styles;
+
+  const { divPrinc, title, datos, img, btn, divBtn } = styles;
 
   return (
     <div className={divPrinc}>
-      {videogame.name ? (
+      {loading ? (
+        <LoadingDetail />
+      ) : (
         <>
           <div>
             <img className={img} src={videogame.background_image} alt={videogame.background_image} />
           </div>
           <div className={datos}>
-            <h1 className={title}>{videogame.id} - {videogame.name.toUpperCase()}</h1>
+            <h1 className={title}>{`${videogame.id} - ${videogame.name}`}</h1>
             <h2>SLUG | {videogame.slug}</h2>
             <h2>GENRES | {videogame.genres}</h2>
             <h2>PLATFORMS | {videogame.platforms}</h2>
             <h2>RELEASED | {videogame.released}</h2>
             <h2>RATING | {videogame.rating}</h2>
             <p></p>
-            <Link to="/home">
-          <button className={btn} type="submit">Volver</button>
-      </Link>
           </div>
+          <div className={divBtn}><Link to="/home">
+              <button className={btn} type="submit">Volver a Home</button>
+            </Link>
+            </div>
         </>
-      ) : (
-        <p>Cargando pagina...</p>
       )}
     </div>
   );
