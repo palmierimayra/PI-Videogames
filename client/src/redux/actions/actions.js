@@ -1,4 +1,4 @@
-import { VIDEOGAME_BY_ID, FILTER_BY_ORIGIN, FILTER_BY_GENRE, ORDER_BY_NAME, ORDER_BY_RATING, LOAD_VIDEOGAMES, LOAD_GENRES, CREATE_VIDEOGAME, SEARCH_VIDEOGAME } from "./types";
+import { CLEAR_ALL, VIDEOGAME_BY_ID, FILTER_BY_ORIGIN, FILTER_BY_GENRE, ORDER_BY_NAME, ORDER_BY_RATING, LOAD_VIDEOGAMES, LOAD_GENRES, CREATE_VIDEOGAME, SEARCH_VIDEOGAME } from "./types";
 import axios from 'axios';
 
 export const loadVideogames = () => {
@@ -83,3 +83,11 @@ export const searchVideogame = (name) => {
     })
   }
 }
+
+export const clearAll = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CLEAR_ALL,
+    });
+  };
+};

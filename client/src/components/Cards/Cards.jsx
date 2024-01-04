@@ -3,7 +3,7 @@ import Pagination from "../Pagination/Pagination";
 import Loading from "../Loading/Loading";
 import Nav from "../Nav/Nav";
 import styles from "./cards.module.css";
-import { loadVideogames, loadGenres, orderByName, orderByRating, filterByGenre, filterByOrigin } from "../../redux/actions/actions";
+import { clearAll, loadVideogames, loadGenres, orderByName, orderByRating, filterByGenre, filterByOrigin } from "../../redux/actions/actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,6 +18,7 @@ const Cards = () => {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
+    dispatch(clearAll());
     dispatch(loadVideogames()).then(() => {
       setLoading(false);
     });
@@ -32,11 +33,22 @@ const Cards = () => {
   const handleOrderR = (event) => {
     const order = event.target.value;
     dispatch(orderByRating(order));
+    
+    if(order==="Order By Rating") {
+      dispatch(loadVideogames());
+    } else {
+      dispatch(orderByName(order));
+    }
   };
 
   const handleOrderN = (event) => {
     const order = event.target.value;
-    dispatch(orderByName(order));
+
+    if(order==="Order By Name") {
+      dispatch(loadVideogames());
+    } else {
+      dispatch(orderByName(order));
+    }
   };
 
   const handleFilterG = (event) => {
@@ -68,12 +80,12 @@ const handleFilterO = (event) => {
             {!loading && (
       <div>
         <select className={order} onChange={handleOrderR}>
-          <option value="" defaultValue>Order By Rating</option>
+          <option value="Order By Rating" defaultValue>Order By Rating</option>
           <option value="A">Ascendent</option>
           <option value="D">Descendent</option>
         </select>
         <select className={order} onChange={handleOrderN}>
-          <option value="" defaultValue>Order By Name</option>
+          <option value="Order By Name" defaultValue>Order By Name</option>
           <option value="A">Ascendent</option>
           <option value="D">Descendent</option>
         </select>
@@ -89,10 +101,19 @@ const handleFilterO = (event) => {
         <option value="API">API</option>
       </select>
       </div>)}
-      {loading ? (<Loading />) : (
+      {loading ? (
+        <Loading />
+      ) : (
         <div className={divFondo}>
-          {videogames &&
-            videogames.slice((pagina - 1) * porPagina, (pagina - 1) * porPagina + porPagina).map(({ id, name, background_image, genres, rating, source }, index) => {
+          {videogames.length === 0 ? (
+            alert("No se encontraron videojuegos con el nombre indicado.")
+          ) : (
+            videogames
+              .slice(
+                (pagina - 1) * porPagina,
+                (pagina - 1) * porPagina + porPagina
+              )
+              .map(({ id, name, background_image, genres, rating, source }, index) => {
                 return (
                   <Card
                     key={id}
@@ -104,7 +125,8 @@ const handleFilterO = (event) => {
                     source={source}
                   />
                 );
-              })}
+              })
+          )}
         </div>
       )}
       {!loading && (

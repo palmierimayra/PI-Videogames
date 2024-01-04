@@ -1,4 +1,4 @@
-import { VIDEOGAME_BY_ID, FILTER_BY_ORIGIN, FILTER_BY_GENRE, ORDER_BY_NAME, ORDER_BY_RATING , LOAD_VIDEOGAMES, LOAD_GENRES, CREATE_VIDEOGAME, SEARCH_VIDEOGAME } from "./actions/types";
+import { CLEAR_ALL, VIDEOGAME_BY_ID, FILTER_BY_ORIGIN, FILTER_BY_GENRE, ORDER_BY_NAME, ORDER_BY_RATING , LOAD_VIDEOGAMES, LOAD_GENRES, CREATE_VIDEOGAME, SEARCH_VIDEOGAME } from "./actions/types";
 
 const initialState = {
   allVideogames: [],
@@ -6,7 +6,6 @@ const initialState = {
   videogamesOriginal: [],
   createVideogame: null,
   videogameById: [],
-  searchByName: [],
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -98,6 +97,15 @@ const rootReducer = (state = initialState, { type, payload }) => {
        };
      }
     
+     case CLEAR_ALL: {
+      return {
+            ...state,
+            allVideogames: [],
+            videogamesOriginal: [],
+            videogameById: [],
+          }
+      }
+
 default:
   return {
     ...state,

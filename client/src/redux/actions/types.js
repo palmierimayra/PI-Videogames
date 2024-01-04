@@ -7,3 +7,4 @@ export const LOAD_GENRES = 'LOAD_GENRES';
 export const CREATE_VIDEOGAME = 'CREATE_VIDEOGAME';
 export const SEARCH_VIDEOGAME = 'SEARCH_VIDEOGAME';
 export const VIDEOGAME_BY_ID = 'VIDEOGAME_BY_ID';
+export const CLEAR_ALL = "CLEAR_ALL";

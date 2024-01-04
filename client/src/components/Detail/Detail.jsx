@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styles from "../Detail/detail.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { videogameById } from "../../redux/actions/actions";
+import { clearAll, videogameById } from "../../redux/actions/actions";
 import LoadingDetail from "../LoadingDetail/LoadingDetail";
 
 export default function Detail() {
@@ -12,9 +12,10 @@ export default function Detail() {
   const videogame = useSelector((state) => state.videogameById);
 
   useEffect(() => {
-    const getVideogameDetail = () => {
-        dispatch(videogameById(id));
-        setLoading(false);
+    const getVideogameDetail = async () => {
+      dispatch(clearAll());
+      await dispatch(videogameById(id));
+      setLoading(false);
     };
     getVideogameDetail();
   }, [dispatch, id]);
