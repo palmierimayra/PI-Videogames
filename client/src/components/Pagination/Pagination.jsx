@@ -31,6 +31,10 @@ export default function Pagination ({pagina, setPagina, input, setInput, maximo}
             } else if (!isNaN(inputValue)) {
                 setPagina(inputValue);
                 setInput(inputValue);
+            } else if (isNaN(inputValue)) {
+                alert("El caracter ingresado no es un número.");
+                setPagina(1);
+                setInput(1);
             }
         }
     };
