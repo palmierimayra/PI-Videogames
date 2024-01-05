@@ -49,22 +49,26 @@
     "@babel/preset-react": "^7.23.3",
     "babel-jest": "^29.7.0",
     "css-loader": "^6.8.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "redux-mock-store": "^1.5.4"
   },
   "jest": {
     "transform": {
-      "^.+\\.jsx?$": "babel-jest",
-      "^.+\\.css$": "path/to/css-loader.js"
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.css$": "<rootDir>/src/css-loader.js"
     },
     "transformIgnorePatterns": [
-      "/node_modules/(?!axios)/"
+      "<rootDir>/node_modules/"
     ],
-    "preset": "@babel/preset-react"
+    "preset": "@babel/preset-react",
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+    }
   },
   "babel": {
     "presets": [
-      "@babel/preset-env",
+      "@babel/preset-env", 
       "@babel/preset-react"
     ],
     "plugins": [

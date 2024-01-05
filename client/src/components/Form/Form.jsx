@@ -37,6 +37,11 @@ const [errors, setErrors] = useState({
 
   const handleInputChange = (e) => {
     const { name, value, checked } = e.target;
+
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
   
     if (name === "genres" || name === "platforms") {
       let arr = formData[name];
