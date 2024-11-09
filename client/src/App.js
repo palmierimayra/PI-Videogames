@@ -5,7 +5,7 @@ import Detail from './components/Detail/Detail';
 import Form from './components/Form/Form';
 import { Routes, Route } from 'react-router-dom';
 import axios from "axios";
-axios.defaults.baseURL = "https://pi-videogames-production-21fb.up.railway.app/"
+axios.defaults.baseURL = "http://localhost:3001/"
 
 function App() {
 
